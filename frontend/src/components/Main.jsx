@@ -1,11 +1,11 @@
 import React from 'react'
 import Content from './main/Content'
-import Navbar from './main/Navbar'
+import NavbarComponent from './main/NavbarComponent'
 
 function Main() {
   return (
     <div>
-        <Navbar />
+        <NavbarComponent />
         <Content />
     </div>
   )

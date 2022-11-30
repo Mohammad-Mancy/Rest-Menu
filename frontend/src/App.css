@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+.login-btn{
+  text-decoration-line:none;
+  color: #fff;
+  font-size: large;
+}
+
+#navbarScroll{
+  place-content:end;
+}
