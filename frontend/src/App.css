@@ -46,3 +46,12 @@
 #navbarScroll{
   place-content:end;
 }
+
+.category{
+  width: 200px;
+}
+
+.bottom-nav{
+  margin-top: 3vh;
+  gap: 10px;
+}
