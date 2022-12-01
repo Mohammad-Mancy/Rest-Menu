@@ -63,3 +63,8 @@
   margin: 5vh;
   justify-content: center;
 }
+
+.nav-link-admin{
+  font-size: 1.5rem !important;
+  color: #000 !important;
+}
