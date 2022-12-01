@@ -55,3 +55,11 @@
   margin-top: 3vh;
   gap: 10px;
 }
+
+.items-list{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  margin: 5vh;
+  justify-content: center;
+}
