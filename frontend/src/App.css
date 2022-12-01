@@ -65,6 +65,28 @@
 }
 
 .nav-link-admin{
-  font-size: 1.5rem !important;
+  font-size: 1.3rem !important;
   color: #000 !important;
+}
+
+.dashboard-card{
+  border-radius: 50% !important;
+  width: 18rem !important;
+  height: 18rem !important;
+}
+
+.dashboard-card-body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard-wrapper{
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
 }
