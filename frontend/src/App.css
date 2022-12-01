@@ -91,7 +91,7 @@
   margin-top: 50px;
 }
 
-.table-category{
+.table-category,.table-items{
   margin-top: 50px;
 }
 
@@ -100,7 +100,7 @@
   text-align: start;
 }
 
-.category-delete-btn{
+.category-delete-btn,.items-delete-btn{
   border: none;
   font-size: 24px;
   background-color: transparent;
@@ -108,7 +108,7 @@
   cursor: pointer;
   border-radius: 50%;
 }
-.category-edit-btn{
+.category-edit-btn,.items-edit-btn{
   border: none;
   font-size: 24px;
   background-color: transparent;
@@ -116,7 +116,7 @@
   cursor: pointer;
   border-radius: 50%;
 }
-.category-edit-btn:hover,.category-delete-btn:hover{
+.category-edit-btn:hover,.category-delete-btn:hover,.items-delete-btn:hover,.items-edit-btn:hover{
   background-color: #fff;
 }
 

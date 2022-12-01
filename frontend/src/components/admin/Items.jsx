@@ -16,7 +16,7 @@ function Items() {
             <Button variant="primary">Add Item</Button>
         </div>
 
-        <Table bordered hover className='table-category'>
+        <Table bordered hover className='table-items'>
             <thead>
                 <tr>
                     <th>#</th>
@@ -34,9 +34,9 @@ function Items() {
                     <td>Platters</td>
                     <td>        
                         <span >
-                            <button className='category-delete-btn'
+                            <button className='items-delete-btn'
                             ><RiDeleteBin5Line/></button>
-                            <button className='category-edit-btn'
+                            <button className='items-edit-btn'
                             ><FaEdit/></button>
                         </span>    
                     </td>
@@ -48,9 +48,9 @@ function Items() {
                     <td>Platters</td>
                     <td>        
                         <span >
-                            <button className='category-delete-btn'
+                            <button className='items-delete-btn'
                             ><RiDeleteBin5Line/></button>
-                            <button className='category-edit-btn'
+                            <button className='items-edit-btn'
                             ><FaEdit/></button>
                         </span>    
                     </td>
@@ -62,9 +62,9 @@ function Items() {
                     <td>Platters</td>
                     <td>        
                         <span >
-                            <button className='category-delete-btn'
+                            <button className='items-delete-btn'
                             ><RiDeleteBin5Line/></button>
-                            <button className='category-edit-btn'
+                            <button className='items-edit-btn'
                             ><FaEdit/></button>
                         </span>    
                     </td>
