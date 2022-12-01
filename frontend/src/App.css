@@ -95,7 +95,7 @@
   margin-top: 50px;
 }
 
-.add-cat-div{
+.add-cat-div,.add-item-div{
   margin: 50px;
   text-align: start;
 }
@@ -118,4 +118,8 @@
 }
 .category-edit-btn:hover,.category-delete-btn:hover{
   background-color: #fff;
+}
+
+.nav-tabs{
+  --bs-nav-tabs-border-radius:none !important;
 }
