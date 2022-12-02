@@ -10,16 +10,18 @@ mongoose.connect(process.env.DB_CONNECT,
         }
 );
 
+// bcrypt(password) => $2a$12$/rkjjk..I3UsgYpJgPp8duLrzdGDnDGLb7J.z14aUdRLDKKExAHkW
+
 const seedUser = [
     {
         name:"Admin_1",
         email:"admin_1@gmail.com",
-        password:"password"
+        password:"$2a$12$/rkjjk..I3UsgYpJgPp8duLrzdGDnDGLb7J.z14aUdRLDKKExAHkW"
     },
     {
         name:"Admin_2",
         email:"admin_2@gmail.com",
-        password:"password"
+        password:"$2a$12$/rkjjk..I3UsgYpJgPp8duLrzdGDnDGLb7J.z14aUdRLDKKExAHkW"
     },
 ];
 
