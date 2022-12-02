@@ -1,5 +1,6 @@
 const TOKEN_SECRET = process.env.TOKEN_SECRET || "";
 const jwt = require('jsonwebtoken');
+const { addCategoryFunction } = require('./service')
 
 async function addCategory(req,res) {
     try {
@@ -9,7 +10,8 @@ async function addCategory(req,res) {
         if (err) {
           return res.status(401).send(err);
         }
-        res.status(200).send("test");
+        cat = await addCategoryFunction(req.body);
+        res.status(200).send(cat);
       })
     } catch (error) {
       console.error(error);
