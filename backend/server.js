@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const cors = require('cors');
 
 const userRouter = require('./src/user');
+const categoryRouter = require('./src/category')
 
 // DB Connection
 mongoose.connect(process.env.DB_CONNECT,
@@ -18,6 +19,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/user', userRouter);
+app.use('/api/category', categoryRouter);
 
 app.listen(process.env.PORT, () => {
     console.log('Listening on port ' +process.env.PORT)
