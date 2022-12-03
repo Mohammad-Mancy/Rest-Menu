@@ -57,8 +57,13 @@ async function addItemToCategory(itemId,catId) {
     }
 }
 
+async function removeFromArray(cat,id) {
+    return await Category.updateMany({ _id: cat._id }, { $pull: { items: id } });
+  }
+
 module.exports = {
     addCategoryFunction,
     addItemFunction,
-    addItemToCategory
+    addItemToCategory,
+    removeFromArray
   }

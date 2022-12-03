@@ -1,7 +1,8 @@
 const TOKEN_SECRET = process.env.TOKEN_SECRET || "";
 const jwt = require('jsonwebtoken');
 const Category = require('../../model/Category');
-const { addCategoryFunction,addItemFunction,addItemToCategory } = require('./service')
+const Item = require('../../model/Item');
+const { addCategoryFunction,addItemFunction,addItemToCategory,removeFromArray } = require('./service')
 
 // ********************* Category functions *****************************
 
@@ -100,10 +101,33 @@ async function addItem(req,res) {
     }
 }
 
+async function deleteItem(req,res) {
+    try {
+        const token = await req.headers.authorization;
+        jwt.verify(token, TOKEN_SECRET, async (err, decoded) => {
+          if (err) {
+            return res.status(401).send(err);
+          }
+
+          //remove from category.items array
+          const cat = await Category.findOne({ _id: req.body.cat_id });
+          const result = await removeFromArray(cat,req.body.id)
+
+          //delete item
+          await Item.findByIdAndRemove(req.body.id)
+
+          res.status(204).send();
+        })
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 // *********************************************************************
 module.exports = {
     addCategory,
     deleteCategory,
     editCategory,
-    addItem
+    addItem,
+    deleteItem
 }
