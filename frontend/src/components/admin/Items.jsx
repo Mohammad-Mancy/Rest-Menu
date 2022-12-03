@@ -1,12 +1,36 @@
-import React from 'react'
+import React,{ useEffect, useState} from 'react'
 import NavbarComponent from '../main/NavbarComponent'
 import CMSNavbar from './CMSNavbar'
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import { RiDeleteBin5Line } from 'react-icons/ri'
-import { FaEdit } from 'react-icons/fa'
+import ItemCard from './card/ItemCard';
 
 function Items() {
+
+    const [categories,setCategories] = useState([]);
+
+    const getCategories = async (e) => {
+        try {
+          let res = await fetch('http://127.0.0.1:3001/api/category/getCategoriesWithItems',{
+            method: 'GET',
+            headers:{
+              'Content-Type' : 'application/json'
+            }
+          })
+          const data = await res.json();
+          if (res.status === 200 ) {
+            setCategories(data)
+          }
+    
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    
+    useEffect ( () => {
+        getCategories()
+      },[]);
+console.log(categories)
   return (
     <div>
         <NavbarComponent admin={true} />
@@ -27,48 +51,26 @@ function Items() {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Chicken Platte</td>
-                    <td>160000 <strong>L.L</strong></td>
-                    <td>Platters</td>
-                    <td>        
-                        <span >
-                            <button className='items-delete-btn'
-                            ><RiDeleteBin5Line/></button>
-                            <button className='items-edit-btn'
-                            ><FaEdit/></button>
-                        </span>    
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Chicken Platte 2</td>
-                    <td>160000 <strong>L.L</strong></td>
-                    <td>Platters</td>
-                    <td>        
-                        <span >
-                            <button className='items-delete-btn'
-                            ><RiDeleteBin5Line/></button>
-                            <button className='items-edit-btn'
-                            ><FaEdit/></button>
-                        </span>    
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Chicken Platte 3</td>
-                    <td>160000 <strong>L.L</strong></td>
-                    <td>Platters</td>
-                    <td>        
-                        <span >
-                            <button className='items-delete-btn'
-                            ><RiDeleteBin5Line/></button>
-                            <button className='items-edit-btn'
-                            ><FaEdit/></button>
-                        </span>    
-                    </td>
-                </tr>
+                {categories.map((category,i)=>{
+                    return(
+                        category.items.map(({_id,name,price},index) => (
+                            <ItemCard
+                            key={_id}
+                            id={_id}
+                            name={name}
+                            price={price}
+                            cat={category.title}
+                            onDelete={() => {
+                                //delete method
+                                window.location.reload()
+                            }}
+                            onEdit= { () => {
+                                // edit method
+                                }}
+                            />
+                            ))
+                    )
+                })}
             </tbody>
         </Table>
     </div>

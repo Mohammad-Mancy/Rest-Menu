@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { addCategory,deleteCategory,editCategory,addItem,deleteItem,editItem,getCategory,getItem,getItemByCat } = require('./controller')
+const { addCategory,deleteCategory,editCategory,addItem,deleteItem,editItem,getCategory,getItem,getItemByCat,getCategoriesPopulated } = require('./controller')
 
 const router = Router();
 
@@ -8,6 +8,7 @@ router.post('/add', addCategory);
 router.delete('/delete', deleteCategory);
 router.put('/edit', editCategory);
 router.get('/get', getCategory);
+router.get('/getCategoriesWithItems', getCategoriesPopulated);
 
 // Items APIs
 router.post('/item/add', addItem);

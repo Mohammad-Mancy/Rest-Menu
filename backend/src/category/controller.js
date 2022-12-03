@@ -82,6 +82,15 @@ async function getCategory(req,res) {
     }
 }
 
+async function getCategoriesPopulated(req,res ) {
+  try {
+    const categories = await Category.find().populate('items')
+    res.status(200).send(categories)
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 // *******************************************************************
 
 // ********************* Item functions ******************************
@@ -195,5 +204,6 @@ module.exports = {
     editItem,
     getCategory,
     getItem,
-    getItemByCat
+    getItemByCat,
+    getCategoriesPopulated
 }
