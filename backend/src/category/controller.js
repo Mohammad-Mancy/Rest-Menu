@@ -73,6 +73,15 @@ async function editCategory(req,res) {
     }
 }
 
+async function getCategory(req,res) {
+    try {
+        const category = await Category.find()
+        res.status(200).send(category)
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 // *******************************************************************
 
 // ********************* Item functions ******************************
@@ -161,5 +170,6 @@ module.exports = {
     editCategory,
     addItem,
     deleteItem,
-    editItem
+    editItem,
+    getCategory
 }
