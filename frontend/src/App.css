@@ -37,7 +37,7 @@
   }
 }
 
-.login-btn{
+.login-btn,.logout-btn{
   text-decoration-line:none;
   color: #fff;
   font-size: large;

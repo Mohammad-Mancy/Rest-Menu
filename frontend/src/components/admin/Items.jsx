@@ -9,7 +9,7 @@ import { FaEdit } from 'react-icons/fa'
 function Items() {
   return (
     <div>
-        <NavbarComponent />
+        <NavbarComponent admin={true} />
         <CMSNavbar activeLink={'items'} />
 
         <div className="add-item-div">

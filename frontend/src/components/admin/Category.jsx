@@ -9,7 +9,7 @@ import { FaEdit } from 'react-icons/fa'
 function Category() {
   return (
     <div>
-        <NavbarComponent />
+        <NavbarComponent admin={true} />
         <CMSNavbar activeLink={'category'} />
 
         <div className="add-cat-div">

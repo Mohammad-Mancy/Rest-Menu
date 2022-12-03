@@ -6,7 +6,7 @@ import Card from 'react-bootstrap/Card';
 function Dashboard() {
   return (
     <div>
-        <NavbarComponent />
+        <NavbarComponent admin={true} />
         <CMSNavbar activeLink={'dashboard'} />
 
         <div className="dashboard-wrapper">
