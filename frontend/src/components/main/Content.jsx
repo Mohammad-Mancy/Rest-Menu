@@ -4,30 +4,26 @@ import ItemCard from './ItemCard';
 
 function Content() {
 
-  // Mock server
-  const category=[
-    {id:1,
-    icon:"https://via.placeholder.com/150",
-    name:"Platters"},
-    {id:2,
-      icon:"https://via.placeholder.com/150",
-      name:"Platters2"},
-    {id:3,
-      icon:"https://via.placeholder.com/150",
-      name:"Platters4"},
-    {id:4,
-      icon:"https://via.placeholder.com/150",
-      name:"Platters5"},
-    {id:5,
-      icon:"https://via.placeholder.com/150",
-      name:"Platters6"},
-    {id:6,
-      icon:"https://via.placeholder.com/150",
-      name:"Platters7"},
-  ]
-  // _______________________
-
   const [items,setItems] = useState([])
+  const [category,setCategory] = useState([])
+
+  const getCategories = async (e) => {
+    try {
+      let res = await fetch('http://127.0.0.1:3001/api/category/get',{
+        method: 'GET',
+        headers:{
+          'Content-Type' : 'application/json'
+        }
+      })
+      const data = await res.json();
+      if (res.status === 200 ) {
+        setCategory(data)
+      }
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   const filterResult=(CatItem)=>{
       // Api get array of items for specfic category
@@ -72,11 +68,12 @@ function Content() {
     }
 
     useEffect ( () => {
+      getCategories()
       filterResult(1);
     },[]);
 
     // Loading for items 
-    if (items.length === 0) {
+    if (items.length === 0 || category.length === 0) {
       return(
         <div>
           loading...
@@ -88,10 +85,10 @@ function Content() {
 
       {/* Category bar */}
       <ScrollMenu scrollContainerClassName="bottom-nav">
-        {category.map(({ id,icon,name }) => (
+        {category.map(({ id,icon,title }) => (
           <div className='category' key={id} onClick={()=>filterResult(id)}>
-              <img src={icon} alt="Category Icon" />
-              <div className='cat-title'>{name}</div>
+              <img src={`http://localhost:3001/public/media/icon/${icon}`} alt="Category Icon" className='category-img'/>
+              <div className='cat-title'>{title}</div>
           </div>
         ))}
       </ScrollMenu>

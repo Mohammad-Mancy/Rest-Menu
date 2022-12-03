@@ -123,3 +123,12 @@
 .nav-tabs{
   --bs-nav-tabs-border-radius:none !important;
 }
+
+.category-img{
+  width: 10rem;
+}
+
+.cat-title{
+  font-size: 2rem;
+  font-weight: 600;
+}

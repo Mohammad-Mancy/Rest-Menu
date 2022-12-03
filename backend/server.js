@@ -21,6 +21,8 @@ app.use(express.json());
 app.use('/api/user', userRouter);
 app.use('/api/category', categoryRouter);
 
+app.use("/public", express.static(`./public`));//public path to access the media folder from frontend
+
 app.listen(process.env.PORT, () => {
     console.log('Listening on port ' +process.env.PORT)
 })

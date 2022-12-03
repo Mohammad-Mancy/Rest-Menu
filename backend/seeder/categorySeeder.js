@@ -13,15 +13,31 @@ mongoose.connect(process.env.DB_CONNECT,
 const seedCat = [
     {
         title:"Platters",
-        icon:"platters.jpg",
+        icon:"platters.png",
         items:[
             mongoose.Types.ObjectId('4edd40c86762e0fb12000001'),
             mongoose.Types.ObjectId('4edd40c86762e0fb12000002')
         ]
     },
     {
-        title:"Salads",
-        icon:"Salads.jpg"
+        title:"Salad",
+        icon:"salad.png"
+    },
+    {
+        title:"Sandwich",
+        icon:"sandwich.png"
+    },
+    {
+        title:"Burger",
+        icon:"burger.png"
+    },
+    {
+        title:"Box and Dips",
+        icon:"boxAndDips.png"
+    },
+    {
+        title:"Beverage",
+        icon:"beverage.png"
     },
 ];
 
