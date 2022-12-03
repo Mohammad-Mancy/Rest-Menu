@@ -163,6 +163,16 @@ async function editItem(req,res) {
         console.error(error);
     }
 }
+
+async function getItem(req,res) {
+    try {
+        const item = await Item.find()
+        res.status(200).send(item)
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 // *********************************************************************
 module.exports = {
     addCategory,
@@ -171,5 +181,6 @@ module.exports = {
     addItem,
     deleteItem,
     editItem,
-    getCategory
+    getCategory,
+    getItem
 }
