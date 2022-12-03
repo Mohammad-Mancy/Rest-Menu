@@ -59,11 +59,16 @@ async function addItemToCategory(itemId,catId) {
 
 async function removeFromArray(cat,id) {
     return await Category.updateMany({ _id: cat._id }, { $pull: { items: id } });
-  }
+}
+
+async function getItemsByCategory(id) {
+    return await Category.findById(id).populate('items');
+}
 
 module.exports = {
     addCategoryFunction,
     addItemFunction,
     addItemToCategory,
-    removeFromArray
+    removeFromArray,
+    getItemsByCategory
   }
