@@ -50,6 +50,14 @@
 .category{
   width: 200px;
 }
+.category:hover{
+  cursor: pointer;
+  transform:scale(.9);
+  transition: 0.2s;
+}
+.category:active{
+  background-color:seashell;
+}
 
 .bottom-nav{
   margin-top: 3vh;
@@ -125,10 +133,21 @@
 }
 
 .category-img{
-  width: 10rem;
+  width: 3rem;
 }
 
 .cat-title{
   font-size: 2rem;
   font-weight: 600;
+}
+
+.image-item-card{
+  width: 350px;
+  height: 350px;
+}
+
+.react-horizontal-scrolling-menu--scroll-container{
+  width: 80vw !important;
+  margin: auto !important;
+  margin-top: 20px !important;
 }

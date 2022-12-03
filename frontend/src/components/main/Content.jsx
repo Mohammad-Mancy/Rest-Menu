@@ -25,51 +25,47 @@ function Content() {
     }
   }
 
-  const filterResult=(CatItem)=>{
-      // Api get array of items for specfic category
-      const newItems = [
-        {
-          id:1,
-          itemName : 'Chicken Platter'+' '+CatItem,
-          description : "4 chicken pieces with our special sauce served with bbq dip and wedges",
-          price : 160000,
-          image : "https://via.placeholder.com/150"
-        },
-        {
-          id:1,
-          itemName : 'Chicken Platter'+' '+CatItem,
-          description : "4 chicken pieces with our special sauce served with bbq dip and wedges",
-          price : 160000,
-          image : "https://via.placeholder.com/150"
-        },
-        {
-          id:1,
-          itemName : 'Chicken Platter'+' '+CatItem,
-          description : "4 chicken pieces with our special sauce served with bbq dip and wedges",
-          price : 160000,
-          image : "https://via.placeholder.com/150"
-        },
-        {
-          id:1,
-          itemName : 'Chicken Platter'+' '+CatItem,
-          description : "4 chicken pieces with our special sauce served with bbq dip and wedges",
-          price : 160000,
-          image : "https://via.placeholder.com/150"
-        },
-        {
-          id:1,
-          itemName : 'Chicken Platter'+' '+CatItem,
-          description : "4 chicken pieces with our special sauce served with bbq dip and wedges",
-          price : 160000,
-          image : "https://via.placeholder.com/150"
+  const filterResult = async (CatId)=>{
+        try {
+          let res = await fetch('http://127.0.0.1:3001/api/category/item/get/byCategory',{
+            method: 'POST',
+            headers:{
+              'Content-Type' : 'application/json'
+            },
+            body:JSON.stringify({
+              id:CatId
+            })
+          })
+          const data = await res.json();
+          if (res.status === 200 ) {
+            setItems(data)
+          }
+
+        } catch (error) {
+          console.error(error);
         }
-      ]
-      setItems(newItems)
     }
+
+  const getAllItems = async (e) => {
+    try {
+      let res = await fetch('http://127.0.0.1:3001/api/category/item/get',{
+        method: 'GET',
+        headers:{
+          'Content-Type' : 'application/json'
+        }
+      })
+      const data = await res.json();
+      if (res.status === 200 ) {
+        setItems(data)
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
     useEffect ( () => {
       getCategories()
-      filterResult(1);
+      getAllItems()
     },[]);
 
     // Loading for items 
@@ -85,8 +81,12 @@ function Content() {
 
       {/* Category bar */}
       <ScrollMenu scrollContainerClassName="bottom-nav">
-        {category.map(({ id,icon,title }) => (
-          <div className='category' key={id} onClick={()=>filterResult(id)}>
+      <div className='category' key={"all"} onClick={() => getAllItems()}>
+              <img src={`http://localhost:3001/public/media/icon/all.png`} alt="Category Icon" className='category-img'/>
+              <div className='cat-title'>All</div>
+          </div>
+        {category.map(({ _id,icon,title }) => (
+          <div className='category' key={_id} onClick={()=>filterResult(_id)}>
               <img src={`http://localhost:3001/public/media/icon/${icon}`} alt="Category Icon" className='category-img'/>
               <div className='cat-title'>{title}</div>
           </div>
@@ -96,10 +96,11 @@ function Content() {
 
     {/* items list */}
     <div className='items-list'>
-      {items.map(({id,itemName,description,price,image}) => (
+      {items.map(({_id,name,description,price,image}) => (
           <ItemCard
-            id={id}
-            itemName={itemName}
+            id={_id}
+            key={_id}
+            itemName={name}
             description={description}
             price={price}
             image={image}
