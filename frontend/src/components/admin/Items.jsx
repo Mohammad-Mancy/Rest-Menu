@@ -5,10 +5,13 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import ItemCard from './card/ItemCard';
 import AddItem from './modal/AddItem';
+import { reactLocalStorage } from 'reactjs-localstorage';
 
 function Items() {
 
     const [categories,setCategories] = useState([]);
+
+    const token_key = reactLocalStorage.get('token');
 
     const getCategories = async (e) => {
         try {
@@ -31,7 +34,28 @@ function Items() {
     useEffect ( () => {
         getCategories()
       },[]);
-console.log(categories)
+
+      const handleDeleteItem = async (_id,cat_id) => {
+        try {
+          let res = await fetch('http://127.0.0.1:3001/api/category/item/delete',{
+            method : 'DELETE',
+            headers : {
+              'Content-Type' : 'application/json',
+              'authorization' : `${token_key}`
+            },
+            body : JSON.stringify({
+              cat_id:cat_id,
+              id:_id
+            })
+          })
+          if (res.status === 204) {
+            console.log('Deleted')
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      
   return (
     <div>
         <NavbarComponent admin={true} />
@@ -60,7 +84,7 @@ console.log(categories)
                             price={price}
                             cat={category.title}
                             onDelete={() => {
-                                //delete method
+                                handleDeleteItem(_id,category._id)
                                 window.location.reload()
                             }}
                             onEdit= { () => {
