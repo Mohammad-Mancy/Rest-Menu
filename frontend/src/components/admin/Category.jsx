@@ -84,9 +84,7 @@ function Category() {
                       handleDeleteCategory(_id)
                       window.location.reload()
                     }}
-                    onEdit= { () => {
-                        // edit method
-                     }}
+                    _id={_id}
                     />
                     ))}
             </tbody>

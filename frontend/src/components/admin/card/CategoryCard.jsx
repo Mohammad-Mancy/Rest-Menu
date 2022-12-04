@@ -1,8 +1,8 @@
 import React from 'react'
 import { RiDeleteBin5Line } from 'react-icons/ri'
-import { FaEdit } from 'react-icons/fa'
+import EditCategory from '../modal/EditCategory'
 
-function CategoryCard({id,title,icon,onDelete,onEdit}) {
+function CategoryCard({id,title,icon,onDelete,_id}) {
   return (
         <tr>
             <td>{id}</td>
@@ -13,9 +13,7 @@ function CategoryCard({id,title,icon,onDelete,onEdit}) {
                     <button className='category-delete-btn'
                     onClick={onDelete}
                     ><RiDeleteBin5Line/></button>
-                    <button className='category-edit-btn'
-                    onClick={onEdit}
-                    ><FaEdit/></button>
+                    <EditCategory id={_id}/>
                 </span>    
             </td>
         </tr>

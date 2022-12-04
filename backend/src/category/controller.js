@@ -24,42 +24,14 @@ async function deleteCategory(req,res) {
     }
 }
 
-async function editCategory(req,res) {
-    try {
-
-      // Check the token if it's Valid
-      const token = await req.headers.authorization;
-      jwt.verify(token, TOKEN_SECRET, async (err) => {
-        if (err) {
-          return res.status(401).send(err);
-        }
-        //create Category object
-        const updatedCategory = new Category({
-            _id: req.body.id,
-            title: req.body.title,
-            icon: req.body.icon
-        },{ upsert: true, new: true })//only mentioned attributes
-
-        // updating category with new one
-        Category.updateOne({_id: req.body.id}, updatedCategory).then(
-            () => {
-                res.status(204).send();
-            }
-            ).catch(
-            (error) => {
-                res.status(400).json({error: error});
-            });
-        });
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).send(error)
-    }
-}
-
 async function getCategory(req,res) {
     try {
-        const category = await Category.find()
+        var category = ''
+        if (req.params.id) {
+            category = await Category.findById(req.params.id)
+        }else{
+            category = await Category.find()
+        }
         res.status(200).send(category)
     } catch (error) {
         console.error(error);
@@ -157,7 +129,6 @@ async function getItemByCat(req,res) {
 // *********************************************************************
 module.exports = {
     deleteCategory,
-    editCategory,
     deleteItem,
     editItem,
     getCategory,

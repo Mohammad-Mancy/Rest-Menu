@@ -1,6 +1,6 @@
 const { Router } = require('express');
-const { addCategoryFunction,addItemFunction,addItemToCategory } = require('./service')
-const { deleteCategory,editCategory,deleteItem,editItem,getCategory,getItem,getItemByCat,getCategoriesPopulated } = require('./controller')
+const { addCategoryFunction,addItemFunction,addItemToCategory,editCategory } = require('./service')
+const { deleteCategory,deleteItem,editItem,getCategory,getItem,getItemByCat,getCategoriesPopulated } = require('./controller')
 const multer = require('multer');
 const uuidv4 = require('uuid/v4'); 
 const TOKEN_SECRET = process.env.TOKEN_SECRET || "";
@@ -55,10 +55,32 @@ router.post('/add', upload.single('image'), async function (req, res) {
       })
   })
 // ****************************************************************
+// ********************* Edit category ****************************
+
+router.put('/edit',upload.single('image'),async (req, res) => {
+  console.log(req.body)
+      // Check the token if it's Valid
+      const token =  await req.headers.authorization;
+      jwt.verify(token, TOKEN_SECRET, async (err) => {
+        if (err) {
+          return res.status(401).send(err);
+        }
+        // if there was an image then do this
+        if (req.file) {
+          const cat = await editCategory(req.body,newfilename);
+          res.status(200).send(cat);
+        }else{
+          const cat = await editCategory(req.body);
+          res.status(200).send(cat);
+        }
+        
+      })
+});
+
+// ****************************************************************
 
 router.delete('/delete', deleteCategory);
-router.put('/edit', editCategory);
-router.get('/get', getCategory);
+router.get('/get/:id?', getCategory);
 router.get('/getCategoriesWithItems', getCategoriesPopulated);
 
 // Items APIs

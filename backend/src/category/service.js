@@ -60,10 +60,36 @@ async function getItemsByCategory(id) {
     return await Category.findById(id).populate('items');
 }
 
+async function editCategory(body,newNameIcon) {
+    try {
+        //create Category object
+        const updatedCategory = new Category({
+            _id: body.id,
+            title: body.title,
+            icon: newNameIcon
+        },{ upsert: true, new: true })//only mentioned attributes
+
+        // updating category with new one
+        Category.updateOne({_id:body.id}, updatedCategory).then(
+            () => {
+                return true;
+            }
+            ).catch(
+            (error) => {
+                return error;
+            });
+
+    } catch (error) {
+        console.error(error);
+        return error;
+    }
+}
+
 module.exports = {
     addCategoryFunction,
     addItemFunction,
     addItemToCategory,
     removeFromArray,
-    getItemsByCategory
+    getItemsByCategory,
+    editCategory
   }
