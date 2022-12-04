@@ -73,41 +73,15 @@ async function deleteItem(req,res) {
     }
 }
 
-async function editItem(req,res) {
-    try {
-        const token = await req.headers.authorization;
-        jwt.verify(token, TOKEN_SECRET, async (err, decoded) => {
-          if (err) {
-            return res.status(401).send(err);
-          }
-
-        //create Item object
-        const updatedItem = new Item({
-            _id: req.body.id,
-            name: req.body.name,
-            description: req.body.description,
-            price: req.body.price,
-            image: req.body.image
-        },{ upsert: true, new: true })
-
-        // updating Item with new one
-        Item.updateOne({_id: req.body.id}, updatedItem).then(
-            () => {
-                res.status(204).send();
-            }
-            ).catch(
-            (error) => {
-                res.status(400).json({error: error});
-            });
-        })
-    } catch (error) {
-        console.error(error);
-    }
-}
 
 async function getItem(req,res) {
     try {
-        const item = await Item.find()
+        var item = ''
+        if (req.params.id) {
+            item = await Item.findById(req.params.id)
+        }else{
+            item = await Item.find()
+        }
         res.status(200).send(item)
     } catch (error) {
         console.error(error);
@@ -130,7 +104,6 @@ async function getItemByCat(req,res) {
 module.exports = {
     deleteCategory,
     deleteItem,
-    editItem,
     getCategory,
     getItem,
     getItemByCat,

@@ -87,9 +87,7 @@ function Items() {
                                 handleDeleteItem(_id,category._id)
                                 window.location.reload()
                             }}
-                            onEdit= { () => {
-                                // edit method
-                                }}
+                            catId={category._id}
                             />
                             ))
                     )

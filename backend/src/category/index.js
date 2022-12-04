@@ -1,10 +1,11 @@
 const { Router } = require('express');
-const { addCategoryFunction,addItemFunction,addItemToCategory,editCategory } = require('./service')
-const { deleteCategory,deleteItem,editItem,getCategory,getItem,getItemByCat,getCategoriesPopulated } = require('./controller')
+const { addCategoryFunction,addItemFunction,addItemToCategory,editCategory,editItem,removeFromArray } = require('./service')
+const { deleteCategory,deleteItem,getCategory,getItem,getItemByCat,getCategoriesPopulated } = require('./controller')
 const multer = require('multer');
 const uuidv4 = require('uuid/v4'); 
 const TOKEN_SECRET = process.env.TOKEN_SECRET || "";
 const jwt = require('jsonwebtoken');
+const Category = require('../../model/Category');
 
 // *********** Category storage **************
 
@@ -103,9 +104,36 @@ router.post('/item/add', uploadItem.single('image'), async function (req, res) {
     })
 })
 // ****************************************************************
+// ********************* Edit category ****************************
+
+router.put('/item/edit',uploadItem.single('image'),async (req, res) => {
+      // Check the token if it's Valid
+      const token =  await req.headers.authorization;
+      jwt.verify(token, TOKEN_SECRET, async (err) => {
+        if (err) {
+          return res.status(401).send(err);
+        }
+        // if there was an image then do this
+        if (req.file) {
+          const cat = await editItem(req.body,newImagename);
+        }else{
+          const cat = await editItem(req.body);
+        }
+        // if the user change the category
+        if (req.body.categoryId) {
+          console.log(req.body.id)
+          addItemToCategory(req.body.id,req.body.categoryId)
+          const cat = await Category.findById(req.body.currentCategoryId)
+          removeFromArray(cat,req.body.id)
+        }
+        res.status(204).send();
+      })
+});
+
+// ****************************************************************
 router.delete('/item/delete', deleteItem);
 router.put('/item/edit', editItem);
-router.get('/item/get', getItem);
+router.get('/item/get/:id?', getItem);
 
 router.post('/item/get/byCategory', getItemByCat);
 

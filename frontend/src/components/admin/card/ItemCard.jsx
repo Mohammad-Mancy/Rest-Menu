@@ -1,8 +1,8 @@
 import React from 'react'
 import { RiDeleteBin5Line } from 'react-icons/ri'
-import { FaEdit } from 'react-icons/fa'
+import EditItem from '../modal/EditItem'
 
-function ItemCard({id,name,price,cat,onDelete}) {
+function ItemCard({id,name,price,cat,onDelete,catId}) {
   return (
         <tr>
             <td>{id}</td>
@@ -14,8 +14,7 @@ function ItemCard({id,name,price,cat,onDelete}) {
                     <button className='items-delete-btn'
                     onClick={onDelete}
                     ><RiDeleteBin5Line/></button>
-                    <button className='items-edit-btn'
-                    ><FaEdit/></button>
+                    <EditItem id={id} catId={catId}/>
                 </span>    
             </td>
         </tr>

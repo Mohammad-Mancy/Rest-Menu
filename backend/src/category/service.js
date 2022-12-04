@@ -85,11 +85,39 @@ async function editCategory(body,newNameIcon) {
     }
 }
 
+async function editItem(body,newNameImage) {
+    try {
+        //create Item object
+        const updatedItem = new Item({
+            _id: body.id,
+            name: body.name,
+            description: body.description,
+            price: body.price,
+            image: newNameImage
+        },{ upsert: true, new: true })//only mentioned attributes
+
+        // updating Item with new one
+        Item.updateOne({_id:body.id}, updatedItem).then(
+            () => {
+                return true;
+            }
+            ).catch(
+            (error) => {
+                return error;
+            });
+
+    } catch (error) {
+        console.error(error);
+        return error;
+    }
+}
+
 module.exports = {
     addCategoryFunction,
     addItemFunction,
     addItemToCategory,
     removeFromArray,
     getItemsByCategory,
-    editCategory
+    editCategory,
+    editItem
   }
