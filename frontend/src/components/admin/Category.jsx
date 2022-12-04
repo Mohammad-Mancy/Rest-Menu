@@ -5,6 +5,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import CategoryCard from './card/CategoryCard'
 import { useEffect } from 'react';
+import AddCategory from './modal/AddCategory';
 
 function Category() {
 
@@ -31,16 +32,14 @@ function Category() {
     useEffect ( () => {
         getCategories()
       },[]);
-      
+
   return (
     <div>
         <NavbarComponent admin={true} />
         <CMSNavbar activeLink={'category'} />
 
-        <div className="add-cat-div">
-            <Button variant="primary">Add Category</Button>
-        </div>
-
+        <AddCategory/>
+        
         <Table bordered hover className='table-category'>
             <thead>
                 <tr>

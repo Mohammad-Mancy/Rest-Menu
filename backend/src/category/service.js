@@ -1,15 +1,11 @@
 const Category = require("../../model/Category");
 const Item = require("../../model/Item");
 
-async function addCategoryFunction(body) {
-    const {
-      title,
-      icon,
-    } = body
+async function addCategoryFunction(title,filename) {
   
     const category = new Category({
-      title,
-      icon
+      title:title,
+      icon:filename
     })
 
     return await category.save();
