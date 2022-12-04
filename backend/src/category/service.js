@@ -11,13 +11,12 @@ async function addCategoryFunction(title,filename) {
     return await category.save();
 }
 
-async function addItemFunction(body) {
+async function addItemFunction(body,image) {
     try {
         const {
             name,
             description,
-            price,
-            image
+            price
           } = body
         
           const item = new Item({

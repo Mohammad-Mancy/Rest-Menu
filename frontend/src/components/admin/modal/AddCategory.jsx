@@ -42,7 +42,7 @@ function AddCategory() {
     <>
     
     <div className="add-cat-div">
-        <Button variant="primary" onClick={handleShow}>AddCategory</Button>
+        <Button variant="primary" onClick={handleShow}>Add Category</Button>
     </div>
 
     <Modal show={show} onHide={handleClose}>

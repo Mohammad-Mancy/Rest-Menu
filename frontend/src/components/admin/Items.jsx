@@ -4,6 +4,7 @@ import CMSNavbar from './CMSNavbar'
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import ItemCard from './card/ItemCard';
+import AddItem from './modal/AddItem';
 
 function Items() {
 
@@ -36,10 +37,8 @@ console.log(categories)
         <NavbarComponent admin={true} />
         <CMSNavbar activeLink={'items'} />
 
-        <div className="add-item-div">
-            <Button variant="primary">Add Item</Button>
-        </div>
-
+        <AddItem/>
+        
         <Table bordered hover className='table-items'>
             <thead>
                 <tr>
