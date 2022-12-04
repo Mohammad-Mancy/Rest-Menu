@@ -25,12 +25,12 @@ function Dashboard() {
             setItems(data.items)
           }
         } catch (error) {
-          console.error(error);
+            console.error(error);
         }
       }
 
     useEffect ( () => {
-    handleGetStatistics()
+        handleGetStatistics()
     },[]);
 
   return (
@@ -59,13 +59,14 @@ function Dashboard() {
             bg='success'
             key='Success'
             text='white'
-            className="mb-2 dashboard-card"
-            >
-            <Card.Body className='dashboard-card-body'>
-                <Card.Text style={{fontSize:'1.5rem'}}>
-                    {categories} Categories
-                </Card.Text>
-            </Card.Body>
+            className="mb-2 dashboard-card">
+
+                <Card.Body className='dashboard-card-body'>
+                    <Card.Text style={{fontSize:'1.5rem'}}>
+                        {categories} Categories
+                    </Card.Text>
+                </Card.Body>
+            
             </Card>
 
             {/* Items card */}
@@ -73,13 +74,14 @@ function Dashboard() {
             bg='success'
             key='Success'
             text='white'
-            className="mb-2 dashboard-card"
-            >
-            <Card.Body className='dashboard-card-body'>
-                <Card.Text style={{fontSize:'1.5rem'}}>
-                {items} Items
-                </Card.Text>
-            </Card.Body>
+            className="mb-2 dashboard-card">
+
+                <Card.Body className='dashboard-card-body'>
+                    <Card.Text style={{fontSize:'1.5rem'}}>
+                    {items} Items
+                    </Card.Text>
+                </Card.Body>
+
             </Card>
 
         </div>

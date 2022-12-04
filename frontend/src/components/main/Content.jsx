@@ -81,33 +81,35 @@ function Content() {
 
       {/* Category bar */}
       <ScrollMenu scrollContainerClassName="bottom-nav">
-      <div className='category' key={"all"} onClick={() => getAllItems()}>
+
+        <div className='category' key={"all"} onClick={() => getAllItems()}>
               <img src={`http://localhost:3001/public/media/icon/all.png`} alt="Category Icon" className='category-img'/>
               <div className='cat-title'>All</div>
-          </div>
+        </div>
+        
         {category.map(({ _id,icon,title }) => (
           <div className='category' key={_id} onClick={()=>filterResult(_id)}>
               <img src={`http://localhost:3001/public/media/icon/${icon}`} alt="Category Icon" className='category-img'/>
               <div className='cat-title'>{title}</div>
           </div>
         ))}
+        
       </ScrollMenu>
 
 
-    {/* items list */}
-    <div className='items-list'>
-      {items.map(({_id,name,description,price,image}) => (
-          <ItemCard
-            id={_id}
-            key={_id}
-            itemName={name}
-            description={description}
-            price={price}
-            image={image}
-          />
-      ))}
-    </div>
-    
+      {/* items list */}
+      <div className='items-list'>
+        {items.map(({_id,name,description,price,image}) => (
+            <ItemCard
+              id={_id}
+              key={_id}
+              itemName={name}
+              description={description}
+              price={price}
+              image={image}
+            />
+        ))}
+      </div>
         
     </div>
   )

@@ -27,7 +27,7 @@ function Items() {
           }
     
         } catch (error) {
-          console.error(error);
+            console.error(error);
         }
       }
     
@@ -52,7 +52,7 @@ function Items() {
             console.log('Deleted')
           }
         } catch (error) {
-          console.error(error);
+            console.error(error);
         }
       }
       

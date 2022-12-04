@@ -89,10 +89,11 @@ function EditItem({id,catId}) {
           formData.append('description',description )
           formData.append('price',price )
           formData.append('id', id)
-          if (image) {
+
+          if (image) {//check if the user change the image
             formData.append('image',image.data )
           }
-          if (categoryId) {
+          if (categoryId) {//check if the user change the category if yes then send the new|old category ID
             formData.append('categoryId',categoryId )
             formData.append('currentCategoryId',currentCategoryId )
           }

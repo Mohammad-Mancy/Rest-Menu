@@ -46,13 +46,13 @@ function EditCategory({id}) {
     let handleCallCurrentCategory = async (e) => {
     try{
         let res = await fetch(`http://127.0.0.1:3001/api/category/get/${id}`,{
-        method:'GET',
-        headers:{'Content-Type' : 'application/json'}
+          method:'GET',
+          headers:{'Content-Type' : 'application/json'}
         })
         const data = await res.json();
         if (res.status === 200 ){
-        setTitle(data.title)
-        setCurrentIcon(data.icon)
+          setTitle(data.title)
+          setCurrentIcon(data.icon)
         }
     }catch(error){
         console.error(error)

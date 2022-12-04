@@ -8,46 +8,47 @@ import Select from 'react-select';
 
 function AddItem() {
 
-    const [show, setShow] = useState(false);
-  
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+  const [show, setShow] = useState(false);
 
-    const [name,setName] = useState()
-    const [image,setImage] = useState()
-    const [description,setDescription] = useState()
-    const [price,setPrice] = useState()
-    const [categoryId,setCategoryId] = useState()
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
-    const [options,setOptions] = useState([]);
+  const [name,setName] = useState()
+  const [image,setImage] = useState()
+  const [description,setDescription] = useState()
+  const [price,setPrice] = useState()
+  const [categoryId,setCategoryId] = useState()
 
-    const token_key = reactLocalStorage.get('token')
-    let handleSubmit = async (e) => {
-        try {
-          let formData = new FormData()
+  const [options,setOptions] = useState([]);//category options
 
-          formData.append('name',name )
-          formData.append('description',description )
-          formData.append('price',price )
-          formData.append('image',image.data )
-          formData.append('categoryId',categoryId )
+  const token_key = reactLocalStorage.get('token')
 
-          let res = await fetch('http://127.0.0.1:3001/api/category/item/add',{
-            method : 'POST',
-            headers : {
-                'authorization': `${token_key}`
-            },
-            body : formData
-          })
-          const data = await res.json()
-          if (res.status === 200) {
-            handleClose()
-            window.location.reload()
-          }
-        } catch (error) {
-          console.log(error)
+  let handleSubmit = async (e) => {
+      try {
+        let formData = new FormData()
+
+        formData.append('name',name )
+        formData.append('description',description )
+        formData.append('price',price )
+        formData.append('image',image.data )
+        formData.append('categoryId',categoryId )
+
+        let res = await fetch('http://127.0.0.1:3001/api/category/item/add',{
+          method : 'POST',
+          headers : {
+              'authorization': `${token_key}`
+          },
+          body : formData
+        })
+        const data = await res.json()
+        if (res.status === 200) {
+          handleClose()
+          window.location.reload()
         }
+      } catch (error) {
+        console.log(error)
       }
+    }
 
 let handleCallCategories = async (e) => {
     try{

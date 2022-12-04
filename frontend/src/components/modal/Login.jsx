@@ -33,8 +33,8 @@ function Login() {
           navigation('/dashboard')
         }
       } catch (error) {
-        console.log(error)
-        alert("somthing went worng")
+          console.log(error)
+          alert("somthing went worng")
       }
     }
 
@@ -44,37 +44,45 @@ function Login() {
           <span className='login-btn'>Login</span>
         </Button>
         <Modal show={show} onHide={handleClose}>
+
           <Modal.Header closeButton>
             <Modal.Title>Login Form</Modal.Title>
           </Modal.Header>
           
           <Modal.Body>
+
             <Form>
               <Form.Group className="mb-3" >
+
                 <Form.Label>Email address</Form.Label>
                 <Form.Control
                   type="email"
                   placeholder="name@example.com"
-                  onChange={e => setEmail(e.target.value)}
-                />
+                  onChange={e => setEmail(e.target.value)}/>
+
               </Form.Group>
               <Form.Group className="mb-3" >
+
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   type="password"
-                  onChange={e => setPassword(e.target.value)}
-                />
+                  onChange={e => setPassword(e.target.value)} />
+
               </Form.Group>
             </Form>
+
           </Modal.Body>
 
           <Modal.Footer>
+
             <Button variant="secondary" onClick={handleClose} >
               Cancel
             </Button>
+            
             <Button variant="primary" onClick={handleSubmit}>
               Login
             </Button>
+
           </Modal.Footer>
         </Modal>
       </>

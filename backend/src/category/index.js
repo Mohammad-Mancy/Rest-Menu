@@ -84,9 +84,13 @@ router.delete('/delete', deleteCategory);
 router.get('/get/:id?', getCategory);
 router.get('/getCategoriesWithItems', getCategoriesPopulated);
 
+// ********************************************************************
+// ********************************************************************
+
 // Items APIs
 
 // ************ store image in images folder ************************
+
 router.post('/item/add', uploadItem.single('image'), async function (req, res) {
   // Check the token if it's Valid
     const token = await req.headers.authorization;
@@ -103,8 +107,9 @@ router.post('/item/add', uploadItem.single('image'), async function (req, res) {
       res.status(200).send(req.body);
     })
 })
+
 // ****************************************************************
-// ********************* Edit category ****************************
+// ********************* Edit Item ****************************
 
 router.put('/item/edit',uploadItem.single('image'),async (req, res) => {
       // Check the token if it's Valid
@@ -122,9 +127,11 @@ router.put('/item/edit',uploadItem.single('image'),async (req, res) => {
         // if the user change the category
         if (req.body.categoryId) {
           console.log(req.body.id)
+          // add item to the new category.items array
           addItemToCategory(req.body.id,req.body.categoryId)
-          const cat = await Category.findById(req.body.currentCategoryId)
-          removeFromArray(cat,req.body.id)
+
+          const cat = await Category.findById(req.body.currentCategoryId)//get the old category then ...
+          removeFromArray(cat,req.body.id)// remove the item._id from old category.items array
         }
         res.status(204).send();
       })
@@ -132,11 +139,9 @@ router.put('/item/edit',uploadItem.single('image'),async (req, res) => {
 
 // ****************************************************************
 router.delete('/item/delete', deleteItem);
-router.put('/item/edit', editItem);
 router.get('/item/get/:id?', getItem);
-
 router.post('/item/get/byCategory', getItemByCat);
 
-router.get('/statistics', getStatistics);
+router.get('/statistics', getStatistics);//get documents count for each collection - for dashboard
 
 module.exports = router;
