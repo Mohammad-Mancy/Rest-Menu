@@ -106,7 +106,7 @@ function EditItem({id,catId}) {
           })
           if (res.status === 204) {
             handleClose()
-            // window.location.reload()
+            window.location.reload()
           }
         } catch (error) {
           console.log(error)

@@ -2,6 +2,7 @@ const TOKEN_SECRET = process.env.TOKEN_SECRET || "";
 const jwt = require('jsonwebtoken');
 const Category = require('../../model/Category');
 const Item = require('../../model/Item');
+const User = require('../../model/User');
 const { removeFromArray,getItemsByCategory } = require('./service')
 
 // ********************* Category functions *****************************
@@ -99,7 +100,20 @@ async function getItemByCat(req,res) {
         console.error(error);
     }
 }
-
+async function getStatistics(req,res) {
+    try {
+        const users = await User.countDocuments({});
+        const categories = await Category.countDocuments({});
+        const items = await Item.countDocuments({});
+        res.status(200).json({
+            users:users,
+            categories:categories,
+            items:items
+        })
+    } catch (error) {
+        console.error(error);
+    }
+}
 // *********************************************************************
 module.exports = {
     deleteCategory,
@@ -107,5 +121,6 @@ module.exports = {
     getCategory,
     getItem,
     getItemByCat,
-    getCategoriesPopulated
+    getCategoriesPopulated,
+    getStatistics
 }

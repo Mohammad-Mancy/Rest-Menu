@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { addCategoryFunction,addItemFunction,addItemToCategory,editCategory,editItem,removeFromArray } = require('./service')
-const { deleteCategory,deleteItem,getCategory,getItem,getItemByCat,getCategoriesPopulated } = require('./controller')
+const { deleteCategory,deleteItem,getCategory,getItem,getItemByCat,getCategoriesPopulated,getStatistics } = require('./controller')
 const multer = require('multer');
 const uuidv4 = require('uuid/v4'); 
 const TOKEN_SECRET = process.env.TOKEN_SECRET || "";
@@ -136,5 +136,7 @@ router.put('/item/edit', editItem);
 router.get('/item/get/:id?', getItem);
 
 router.post('/item/get/byCategory', getItemByCat);
+
+router.get('/statistics', getStatistics);
 
 module.exports = router;
