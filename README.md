@@ -27,7 +27,7 @@ ____
 -  ### Configuration
     1. Create .env file like .env.sample file in backend folder
     2. In .env file you'll create the following variables:
-        - PORT = 3000
+        - PORT = 3001
         - DB_CONNECT = mongodb://localhost:27017/"Your-DB-name"
         - TOKEN_SECRET = "random-string"
 -  ### Installation
