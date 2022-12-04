@@ -6,10 +6,14 @@ import Button from 'react-bootstrap/Button';
 import CategoryCard from './card/CategoryCard'
 import { useEffect } from 'react';
 import AddCategory from './modal/AddCategory';
+import { reactLocalStorage } from 'reactjs-localstorage';
+
 
 function Category() {
 
     const [category,setCategory] = useState([]);
+
+    const token_key = reactLocalStorage.get('token');
 
     const getCategories = async (e) => {
         try {
@@ -32,6 +36,26 @@ function Category() {
     useEffect ( () => {
         getCategories()
       },[]);
+
+      const handleDeleteCategory = async (_id) => {
+        try {
+          let res = await fetch('http://127.0.0.1:3001/api/category/delete',{
+            method : 'DELETE',
+            headers : {
+              'Content-Type' : 'application/json',
+              'authorization' : `${token_key}`
+            },
+            body : JSON.stringify({
+              _id:_id
+            })
+          })
+          if (res.status === 204) {
+            console.log('Deleted')
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
 
   return (
     <div>
@@ -57,8 +81,8 @@ function Category() {
                     title={title}
                     icon={icon}
                     onDelete={() => {
-                        //delete method
-                        window.location.reload()
+                      handleDeleteCategory(_id)
+                      window.location.reload()
                     }}
                     onEdit= { () => {
                         // edit method
